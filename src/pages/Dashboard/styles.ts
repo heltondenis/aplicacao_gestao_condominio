@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Title = styled.h1`
-    font-size: 38px;
+    font-size: 28px;
     color: #3a3a3a;
 `;
 

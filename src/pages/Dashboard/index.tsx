@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { Title, Form, Feed } from './styles';
+import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import api from '../../services/api';
 
@@ -33,7 +34,10 @@ const Dashboard: React.FC = () => {
             onChange={(e) => setNewApartament(e.target.value)} 
             placeholder="Busque pelo número do apartamento..." />
             <button type="submit">Buscar</button>
-            <button id="button-cadastrar" type="submit">Cadastrar</button>
+            
+            <Link to="Apartaments">
+                <button id="button-cadastrar" >Cadastrar</button>
+            </Link>
         </Form>
 
         <Feed>

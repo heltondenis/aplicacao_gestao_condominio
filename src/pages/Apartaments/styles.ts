@@ -12,6 +12,10 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
 
+    input + input {
+        margin-left: 25px;
+    }
+
     input {
         height: 40px;
         width: 320px;
@@ -19,23 +23,10 @@ export const Form = styled.form`
         border: 0px;
         border-radius: 5px 5px 5px 5px;
         color: '#a3a3a3';
-        margin: 10px;
 
         &::placeholder{
             color: '#a8a8b3';
         }
-    }
-
-    input#telefone {
-        width: 210px;
-    }
-    
-    input#dtNascimento {
-        width: 210px;
-    }
-
-    input#email {
-        width: 200px;
     }
 
     hr {
@@ -72,11 +63,6 @@ export const Feed = styled.div`
         margin-top: 16px;
     }
 
-    strong {
-        color: #3a3a3a;
-        margin-right: 5px;
-    }
-
     a {
         background: #fff;
         border-radius: 5px;
@@ -99,10 +85,25 @@ export const Feed = styled.div`
         border-radius: 50%;
     }
 
+    div {
+        margin-left: 16px;
+
+        strong {
+            font-size: 20px;
+            color: '#3D3D4D';
+        }
+
+        p {
+            font-size: 18px;
+            color: '#A8A88B3';
+            margin-top: 4px;
+        }
+    }
+
     button {
-        margin-left: 10px;
+        margin-left: auto;
         color: white;
-        background: #cacaca;
+        background: #57FF86;
         border-radius: 5px;
         border: 0px;
         font-weight: bold;
@@ -112,8 +113,4 @@ export const Feed = styled.div`
         height: 40px;
     }
 }
-`;
-
-export const ButtonSwitchAdmin = styled.div`
-    margin-left: auto;
 `;
