@@ -92,6 +92,10 @@ export const Feed = styled.div`
             font-size: 20px;
             color: '#3D3D4D';
         }
+        
+        h3 {
+            color: #3a3a3a;
+        }
 
         p {
             font-size: 18px;
@@ -111,6 +115,10 @@ export const Feed = styled.div`
         transition: background-color 0.2s;
         width: 130px;
         height: 40px;
+    }
+
+    button#btn-delete {
+        background: #ff5757;
     }
 }
 `;
