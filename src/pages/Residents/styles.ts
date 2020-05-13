@@ -77,6 +77,15 @@ export const Feed = styled.div`
         margin-right: 5px;
     }
 
+    h3 {
+        color: #3a3a3a;
+        margin-left: 10px;
+    }
+
+    p {
+        margin-left: 10px;
+    }
+
     a {
         background: #fff;
         border-radius: 5px;
@@ -108,9 +117,14 @@ export const Feed = styled.div`
         font-weight: bold;
         -webkit-transition: background-color 0.2s;
         transition: background-color 0.2s;
-        width: 130px;
+        width: 70px;
         height: 40px;
     }
+
+    button#btn-delete {
+        background: #ff5757;
+    }
+
 }
 `;
 

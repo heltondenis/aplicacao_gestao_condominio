@@ -1,23 +1,88 @@
-import React, {useState} from 'react';
+import React, {useState, Props, useEffect, FormEvent} from 'react';
 import { Title, Form, Feed, ButtonSwitchAdmin } from './styles';
 import Switch from "react-switch";
+import { useParams, Link } from 'react-router-dom';
+import { Resident } from '../../models/resident.model';
+import api from '../../services/api';
 
-const Residents: React.FC = () => {
- 
-    async function teste() {
+const Residents: React.FC = (props) => {
+    let { id } = useParams();
+    const [full_name, setFullName] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [fone, setFone] = useState('');
+    const [date, setDate] = useState('');
+    const [email, setEmail] = useState('');
+    const [residents, setResidents] = useState<Resident[]>([]);
+    
+    useEffect(() => {
+        api.get(`residents/${id}`).then((response) => {
+            setResidents(response.data.data);
+        });
+    }, []);
+
+    async function handleAddResident(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+    
+        try {
+            const data = {
+                id: id,
+                full_name: full_name, 
+                cpf: cpf,
+                fone: fone,
+                date: date,
+                email: email,
+            }
+
+            api.post(`residents`, data)
+            .then(res => {  
+                setFullName('');
+                setCpf('');
+                setFone('');
+                setDate('');
+                setEmail('');
+                api.get(`residents/${id}`).then((response) => {
+                    setResidents(response.data.data);
+                });
+            });
+        } catch (error) {
+
+        }
+           
+    }
+    
+    async function teste() {    
 
     }
 
     return (
         <>
-        <Title>Você está cadastrando moradores para o apartamento 01.</Title>
-        <Form>
+        <Title>Você está cadastrando moradores para o apartamento {id}.</Title>
+        <Form onSubmit={handleAddResident}>
             <div>
-                <input placeholder="Nome Completo" />
-                <input placeholder="CPF"/>
-                <input id="telefone" placeholder="Telefone" />
-                <input id="dtNascimento" placeholder="Data Nascimento"/>
-                <input id="email" placeholder="Email"/>
+                <input 
+                value={full_name}
+                onChange={(e) => setFullName(e.target.value)} 
+                placeholder="Nome Completo" />
+
+                <input
+                type="number" 
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)} 
+                placeholder="CPF"/>
+
+                <input value={fone}
+                onChange={(e) => setFone(e.target.value)} 
+                id="telefone" placeholder="Telefone" />
+
+                <input value={date}
+                type="date"
+                onChange={(e) => setDate(e.target.value)} 
+                id="dtNascimento" placeholder="Data Nascimento"/>
+
+                <input value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)} 
+                id="email" placeholder="Email"/>
             </div>
             <button type="submit">Cadastrar</button>
             <hr />  
@@ -25,10 +90,13 @@ const Residents: React.FC = () => {
 
         <Title>Moradores Cadastrados.</Title>
         <Feed>
-            <a>
-                <img src="https://images.vexels.com/media/users/3/157612/isolated/preview/b8c07826c517b2acde8e31979b7a0529---cone-de-apartamento-alto-by-vexels.png" alt="" />
+            {residents.map(resident => (
+            <a key={resident.id}>
+                <img src="https://www.pikpng.com/pngl/m/446-4465452_people-icon-png-font-awesome-user-svg-clipart.png" alt="" />
                 <div>
-                    <strong>João Almeida</strong>
+                    <h3>{resident.full_name}</h3>
+                    <p>Email: {resident.email}</p>
+                    <p>: {resident.fone}</p>
                 </div>
                 
                 <ButtonSwitchAdmin>
@@ -44,7 +112,9 @@ const Residents: React.FC = () => {
                 />
                 
                 <button>Editar</button>
+                <button id="btn-delete">Excluir</button>
             </a>
+            ))} 
         </Feed>
         </>
     );
