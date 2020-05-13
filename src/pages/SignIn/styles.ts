@@ -1,42 +1,65 @@
 import styled from "styled-components";
-import { shade } from 'polished';
+import SignInBackground from "../../assets/logo.png";
+import {shade} from 'polished';
 
-export const Title = styled.h1`
-font-size: 38px;
-color: #3a3a3a;
+export const Container = styled.div`
+ height: 100vh;
+ display: flex;
+ align-items: stretch;
 `;
 
-export const Form = styled.form`
-    margin-top: 40px;
-    max-width: 700px;
+export const Content = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    input {
-        height: 50px;
-        padding: 0 24px;
-        border: 0px;
-        border-radius: 5px 0 0 5px;
-        color: '#a3a3a3';
-        margin: 10px;
+    place-content: center;
 
-        &::placeholder{
-            color: '#a8a8b3';
+    width: 100%;
+    max-width: 700px;
+
+    form {
+        margin:80px 0;
+        width: 340px;
+        text-align: center;
+
+        h1 {
+            margin-bottom: 24px;
+        }
+
+        input {
+            background: #232129;
+            border-radius: 10px;
+            border: 2px solid #232129;
+            padding: 16px;
+            width: 100%;
+
+            & + input {
+                margin-top: 8px;
+            }
+        }
+
+        button {
+            background: grey;
+            height: 56px;
+            border-radius: 10px;
+            border: 0;
+            padding: 16px;
+            color: white;
+            width: 100%;
+            font-weight: 500;
+            margin-top: 16px;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background: ${shade(0.2, 'grey')}
+            }
         }
     }
+`;
 
-    button {
-        margin-left: 10px;
-        height: 45px;
-        background: #57FF86;
-        border-radius: 5px;
-        border: 0px;
-        color: white;
-        font-weight: bold;
-        transition: background-color 0.2s;
-
-        &:hover {
-            background: ${shade(0.2, '#57FF86')}
-        }
-    }
+export const Background = styled.div`
+    flex: 1;
+    background: url(${SignInBackground}) no-repeat center;
+    background-size: cover;
 `;
