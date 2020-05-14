@@ -23,13 +23,29 @@ const Repository: React.FC = () => {
             .then(res => {  
                 setNewBlock('');
                 setNewNumber('');
-                api.get("apartaments").then((response) => {
-                    setApartaments(response.data);
-                });
+                serviceSetApartaments();
             });
         } catch (error) {
            
         }
+    }
+
+    function handleDeleteApartament(id:number) {
+        
+        try {
+             api.delete(`apartaments/${id}`).then((response) => {
+                serviceSetApartaments();
+             });
+        } catch (error) {
+           
+        }
+    }
+
+    /** Generic function to search for apartments */
+    function serviceSetApartaments() {
+        api.get("apartaments").then((response) => {
+            setApartaments(response.data);
+        });
     }
 
     return (
@@ -63,9 +79,9 @@ const Repository: React.FC = () => {
                     <p>Bloco: {apartament.block}</p>
                 </div>
                 <Link to={{pathname: `Residents/${apartament.number}`}}>
-                <button>Cadastrar</button>
+                <button id="bnt-cadastrar">Cadastrar</button>
                 </Link>
-                <button id="btn-delete">Excluir</button>
+                <button onClick={(e) => handleDeleteApartament(apartament.id)} id="btn-delete">Excluir</button>
             </a>
             ))} 
         </Feed>
