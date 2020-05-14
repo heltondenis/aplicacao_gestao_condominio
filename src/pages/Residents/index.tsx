@@ -40,14 +40,29 @@ const Residents: React.FC = (props) => {
                 setFone('');
                 setDate('');
                 setEmail('');
-                api.get(`residents/${id}`).then((response) => {
-                    setResidents(response.data.data);
-                });
+                serviceSetResidents();
             });
         } catch (error) {
 
         }
+    }
+
+    function handleDeleteResident(id:number) {
+        
+        try {
+             api.delete(`residents/${id}`).then((response) => {
+                serviceSetResidents();
+             });
+        } catch (error) {
            
+        }
+    }
+
+    /** Generic function to search for residents */
+    function serviceSetResidents() {
+        api.get(`residents/${id}`).then((response) => {
+            setResidents(response.data.data);
+        });
     }
     
     async function teste() {    
@@ -112,7 +127,7 @@ const Residents: React.FC = (props) => {
                 />
                 
                 <button>Editar</button>
-                <button id="btn-delete">Excluir</button>
+                <button onClick={(e) => handleDeleteResident(resident.id)} id="btn-delete">Excluir</button>
             </a>
             ))} 
         </Feed>
