@@ -122,3 +122,72 @@ export const Feed = styled.div`
 }
 `;
 
+export const Dialog = styled.div`
+    h1 {
+        color: #000000b8;
+        margin-left: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    span {
+        font-size: 13px;
+        font-weight: bold;
+        color: #0000008c;
+        margin-left: 10px;
+    }   
+
+    img {
+        margin-top: 10px;
+        width: 20px;
+    }
+
+    hr {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    div#content-resident {
+        margin-left: 9px;
+    }
+
+    hr#hr-resident {
+        margin-right: 13px;
+        color: red;
+        bottom: 2px red;
+        border-color: #1212121c;
+    }
+
+    h1#title-apartament {
+        margin-top: -12px;
+    }
+   
+    button {
+        width: 251px;
+        height: 30px;
+        background: #57FF86;
+        border-radius: 5px;
+        border: 0px;
+        color: white;
+        font-weight: bold;
+        -webkit-transition: background-color 0.2s;
+        transition: background-color 0.2s;
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+        margin-left: 25px;
+        margin-bottom: 10px;
+        margin-top: 30px;
+
+        &:hover {
+            background: ${shade(0.2, '#57FF86')}
+        }
+    }
+
+    .custom-ui {
+        background: #F0F0F5;
+        width: 300px;
+        border-radius: 10px;
+    }
+}
+`;

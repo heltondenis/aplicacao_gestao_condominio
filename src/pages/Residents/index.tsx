@@ -52,13 +52,14 @@ const Residents: React.FC = () => {
 
         }
     }
+    
 
     function handleDeleteResident(id:number) {
         
         try {
              api.delete(`residents/${id}`).then((response) => {
                 serviceSetResidents();
-                toast.dark('🥺 O item foi excluído!', {hideProgressBar: true,});
+                toast.dark('🥺 O morador foi excluído!', {hideProgressBar: true,});
              });
         } catch (error) {
            
@@ -77,7 +78,13 @@ const Residents: React.FC = () => {
     }
 
     function setToggleAdminStatus(id:number) {
-        alert(id);
+        api.put(`/administrative/verify-check/${id}`, {});
+        toast.dark(`✔️ O adminstrador foi alterado!`, {hideProgressBar: true,});
+        setResidents([]);
+        setTimeout(() => {
+            serviceSetResidents();
+          }, 500);
+       
     }
 
     function handleHistoryBack() {
@@ -127,10 +134,10 @@ const Residents: React.FC = () => {
             <a key={resident.id}>
                 <img src="https://www.pikpng.com/pngl/m/446-4465452_people-icon-png-font-awesome-user-svg-clipart.png" alt="" />
                 <div>
-                    <h2>{resident.full_name}</h2>
-                    <p><b>Email:</b> {resident.email}</p>
-                    <p><b>Tel:</b> {resident.fone}</p>
-                    <p><b>CPF:</b> {resident.cpf}</p>
+                    <h3>{resident.full_name}</h3>
+                    <p>Email: {resident.email}</p>
+                    <p>Tel: {resident.fone}</p>
+                    <p>CPF: {resident.cpf}</p>
                 </div>
                 
                 <Link id="link" to={{pathname: ""}}>

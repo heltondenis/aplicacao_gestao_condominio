@@ -13,6 +13,7 @@ const App: React.FC = () => (
             <Routes />
         </BrowserRouter>
     </AuthProvider>
+
     <ToastContainer
         position="top-right"
         autoClose={5000}

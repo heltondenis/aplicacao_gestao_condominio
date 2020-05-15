@@ -40,11 +40,11 @@ const Apartaments: React.FC = () => {
         
         try {
              api.delete(`apartaments/${id}`).then((response) => {
-                toast.dark('🥺 O item foi excluído!', {hideProgressBar: true,});
+                toast.dark('🥺 O apartamento foi excluído!', {hideProgressBar: true,});
                 serviceSetApartaments();
              });
         } catch (error) {
-           
+            toast.error('🥺 Não foi possível excluir o apartamento!', {hideProgressBar: true,});
         }
     }
 
