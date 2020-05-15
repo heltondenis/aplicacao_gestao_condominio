@@ -11,7 +11,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 <h4 align="center">
   Sistema para gerenciamento de condomínios.
 </h4>
-<p align="center">
 
 <p align="center">
   <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -19,9 +18,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
   <a href="#memo-license">License</a>
 </p>
 
-<p align="center">
+<div align="center">
+<img src="https://media.giphy.com/media/h7WoSIWDD2wcLxDXfh/giphy.gif" />
+</div>
 
-![App Screenshot](https://media.giphy.com/media/h7WoSIWDD2wcLxDXfh/giphy.gif)
 
 ## :bulb: Prototyping (Figma)
 <a href="https://www.figma.com/file/7eatKeJ65t180zxoBjwmvn/Gest%C3%A3o-de-condom%C3%ADnio?node-id=0%3A1"><b>Figma link</b></a> 
