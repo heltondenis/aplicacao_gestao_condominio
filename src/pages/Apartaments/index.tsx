@@ -3,8 +3,13 @@ import { Title, Form, Feed } from './styles';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { Apartament } from '../../models/apartament.model';
+import { FiEdit } from 'react-icons/fi';
+import { FiDelete } from 'react-icons/fi';
+import { FiPlusCircle } from 'react-icons/fi';
+import { ToastContainer, toast } from 'react-toastify';
 
-const Repository: React.FC = () => {
+
+const Apartaments: React.FC = () => {
     const [block, setNewBlock] = useState('');
     const [number, setNewNumber] = useState('');
     const [apartaments, setApartaments] = useState<Apartament[]>([]);
@@ -24,6 +29,7 @@ const Repository: React.FC = () => {
                 setNewBlock('');
                 setNewNumber('');
                 serviceSetApartaments();
+                toast.dark(`✔️ O apartamento ${number} foi adicionado com sucesso!`, {hideProgressBar: true,});
             });
         } catch (error) {
            
@@ -34,6 +40,7 @@ const Repository: React.FC = () => {
         
         try {
              api.delete(`apartaments/${id}`).then((response) => {
+                toast.dark('🥺 O item foi excluído!', {hideProgressBar: true,});
                 serviceSetApartaments();
              });
         } catch (error) {
@@ -48,6 +55,10 @@ const Repository: React.FC = () => {
         });
     }
 
+    function handleHistoryBack() {
+        window.history.back();
+    }
+
     return (
         <>
         <Title>Cadastro de apartamento.</Title>
@@ -57,19 +68,23 @@ const Repository: React.FC = () => {
                 <input
                 value={block}
                 onChange={(e) => setNewBlock(e.target.value)} 
-                placeholder="Bloco" />
+                placeholder="Bloco" required/>
 
                 <input
                 type="number" 
                 value={number}
                 onChange={(e) => setNewNumber(e.target.value)} 
-                placeholder="Número"/>
+                placeholder="Número" required/>
             </div>
+            <div>
+                <button id="btn-back" onClick={(e) => handleHistoryBack()}>Voltar</button>
                 <button type="submit">Cadastrar</button>
+            </div>
             <hr />  
         </Form>
 
         <Title>Cadastrar moradores, escolha o apartamento.</Title>
+        
         <Feed>
             {apartaments.map(apartament => (
             <a key={apartament.id}>
@@ -78,10 +93,20 @@ const Repository: React.FC = () => {
                     <h3>Apartamento{apartament.number}</h3>
                     <p>Bloco: {apartament.block}</p>
                 </div>
-                <Link to={{pathname: `Residents/${apartament.number}`}}>
-                <button id="bnt-cadastrar">Cadastrar</button>
+                <Link id="link" to={{pathname: `Residents/${apartament.number}`}}>
+                <FiPlusCircle size={20} />
+                <span> Cadastrar</span>
                 </Link>
-                <button onClick={(e) => handleDeleteApartament(apartament.id)} id="btn-delete">Excluir</button>
+                
+                <Link id="link" to={{pathname: `edit-apartament/${apartament.id}/${apartament.number}/${apartament.block}`}}>
+                <FiEdit size={20} />
+                <span> Editar</span>
+                </Link>
+
+                <Link onClick={(e) => handleDeleteApartament(apartament.id)} id="link" to={{pathname: ''}}>  
+                <FiDelete onClick={(e) => handleDeleteApartament(apartament.id)} size={20} />
+                <span> Deletar</span>
+                </Link>
             </a>
             ))} 
         </Feed>
@@ -89,5 +114,5 @@ const Repository: React.FC = () => {
     );
 }
 
-export default Repository;
+export default Apartaments;
 

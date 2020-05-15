@@ -52,7 +52,6 @@ const Dashboard: React.FC = () => {
         
         <Feed>
             {apartaments.map((apartament => (
-                
             <a key={apartament.id}>
                 <img src="https://images.vexels.com/media/users/3/157612/isolated/preview/b8c07826c517b2acde8e31979b7a0529---cone-de-apartamento-alto-by-vexels.png" alt="" />
                 <div>

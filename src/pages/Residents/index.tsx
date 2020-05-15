@@ -1,22 +1,27 @@
-import React, {useState, Props, useEffect, FormEvent} from 'react';
-import { Title, Form, Feed, ButtonSwitchAdmin } from './styles';
-import Switch from "react-switch";
+import React, {useState, useEffect, FormEvent} from 'react';
+import { Title, Form, Feed } from './styles';
+import { ToastContainer, toast } from 'react-toastify';
 import { useParams, Link } from 'react-router-dom';
 import { Resident } from '../../models/resident.model';
 import api from '../../services/api';
+import { FiDelete } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Residents: React.FC = (props) => {
+const Residents: React.FC = () => {
     let { id } = useParams();
     const [full_name, setFullName] = useState('');
     const [cpf, setCpf] = useState('');
     const [fone, setFone] = useState('');
     const [date, setDate] = useState('');
     const [email, setEmail] = useState('');
+    const [admin_status, setAdminStatus] = useState('');
     const [residents, setResidents] = useState<Resident[]>([]);
     
     useEffect(() => {
         api.get(`residents/${id}`).then((response) => {
             setResidents(response.data.data);
+            setAdminStatus(response.data.data.admin_status);
         });
     }, []);
 
@@ -41,6 +46,7 @@ const Residents: React.FC = (props) => {
                 setDate('');
                 setEmail('');
                 serviceSetResidents();
+                toast.dark(`✔️ O morador ${full_name} foi adicionado com sucesso!`, {hideProgressBar: true,});
             });
         } catch (error) {
 
@@ -52,6 +58,7 @@ const Residents: React.FC = (props) => {
         try {
              api.delete(`residents/${id}`).then((response) => {
                 serviceSetResidents();
+                toast.dark('🥺 O item foi excluído!', {hideProgressBar: true,});
              });
         } catch (error) {
            
@@ -69,6 +76,14 @@ const Residents: React.FC = (props) => {
 
     }
 
+    function setToggleAdminStatus(id:number) {
+        alert(id);
+    }
+
+    function handleHistoryBack() {
+        window.history.back()
+    }
+
     return (
         <>
         <Title>Você está cadastrando moradores para o apartamento {id}.</Title>
@@ -77,29 +92,32 @@ const Residents: React.FC = (props) => {
                 <input 
                 value={full_name}
                 onChange={(e) => setFullName(e.target.value)} 
-                placeholder="Nome Completo" />
+                placeholder="Nome Completo" required/>
 
                 <input
                 type="number" 
                 value={cpf}
                 onChange={(e) => setCpf(e.target.value)} 
-                placeholder="CPF"/>
+                placeholder="CPF" required/>
 
                 <input value={fone}
                 onChange={(e) => setFone(e.target.value)} 
-                id="telefone" placeholder="Telefone" />
+                id="telefone" placeholder="Telefone" required/>
 
                 <input value={date}
                 type="date"
                 onChange={(e) => setDate(e.target.value)} 
-                id="dtNascimento" placeholder="Data Nascimento"/>
+                id="dtNascimento" placeholder="Data Nascimento" required/>
 
                 <input value={email}
                 type="email"
                 onChange={(e) => setEmail(e.target.value)} 
-                id="email" placeholder="Email"/>
+                id="email" placeholder="Email" required/>
             </div>
-            <button type="submit">Cadastrar</button>
+            <div>
+                <button id="btn-back" onClick={(e) => handleHistoryBack()}>Voltar</button>
+                <button type="submit">Cadastrar</button>
+            </div>
             <hr />  
         </Form>
 
@@ -109,25 +127,32 @@ const Residents: React.FC = (props) => {
             <a key={resident.id}>
                 <img src="https://www.pikpng.com/pngl/m/446-4465452_people-icon-png-font-awesome-user-svg-clipart.png" alt="" />
                 <div>
-                    <h3>{resident.full_name}</h3>
-                    <p>Email: {resident.email}</p>
-                    <p>: {resident.fone}</p>
+                    <h2>{resident.full_name}</h2>
+                    <p><b>Email:</b> {resident.email}</p>
+                    <p><b>Tel:</b> {resident.fone}</p>
+                    <p><b>CPF:</b> {resident.cpf}</p>
                 </div>
                 
-                <ButtonSwitchAdmin>
-                    <p id="neat-label"><strong>ADM?</strong></p>
-                </ButtonSwitchAdmin>
-               
-                <Switch
-                className="react-switch"
-                onChange={teste}
-                checked
-                onColor="#57FF86"
-                aria-labelledby="neat-label"
+                <Link id="link" to={{pathname: ""}}>
+                <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value={resident.id}
+                    onClick={() => setToggleAdminStatus(resident.id)}
+                    checked={resident.admin_status ? true : false}
                 />
+                    <span id="span-adm">Adm?</span>
+                </Link>
                 
-                <button>Editar</button>
-                <button onClick={(e) => handleDeleteResident(resident.id)} id="btn-delete">Excluir</button>
+                <Link id="link" to={{pathname: `../edit-resident/${resident.id}`}}>
+                    <FiEdit size={20} />
+                    <span>Editar</span>
+                </Link>
+                
+                <Link id="link" to={{pathname: ""}} onClick={(e) => handleDeleteResident(resident.id)}>
+                    <FiDelete size={20} />
+                    <span>Deletar</span>
+                </Link>
             </a>
             ))} 
         </Feed>
