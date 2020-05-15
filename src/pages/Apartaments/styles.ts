@@ -47,7 +47,7 @@ export const Form = styled.form`
         font-weight: bold;
         transition: background-color 0.2s;
         align-self: center;
-        margin-left: 25px;
+        margin-left: 22px;
 
         &:hover {
             background: ${shade(0.2, '#57FF86')}

@@ -21,8 +21,6 @@ const SignIn: React.FC = () => {
                 email: 'helton@gmail.com',
                 password: '123456'
             });
-      
-
     }, [signIn],
     );
 
@@ -30,16 +28,12 @@ const SignIn: React.FC = () => {
         <Container>
             <Content>
                 <Form ref={formRef} onSubmit={handleSubmit}> 
-                    <h1>Faça seu logon</h1>
-
+                    <h1>Faça seu login</h1>
                     <input placeholder="E-mail" />
-
                     <input type="password" placeholder="Password" />
-
                     <button type="submit">Entrar</button>
                 </Form>
             </Content>
-            <Background />
         </Container>
     );
 }
