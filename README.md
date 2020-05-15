@@ -19,10 +19,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
   <a href="#memo-license">License</a>
 </p>
 
-
 <p align="center">
- <iframe src="https://giphy.com/embed/h7WoSIWDD2wcLxDXfh" width="480" height="335" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/h7WoSIWDD2wcLxDXfh"></p>
-</p>
+
+![App Screenshot](https://media.giphy.com/media/h7WoSIWDD2wcLxDXfh/giphy.gif)
 
 ## :bulb: Prototyping (Figma)
 <a href="https://www.figma.com/file/7eatKeJ65t180zxoBjwmvn/Gest%C3%A3o-de-condom%C3%ADnio?node-id=0%3A1"><b>Figma link</b></a> 
